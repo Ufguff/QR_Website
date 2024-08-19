@@ -3,3 +3,94 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+html, body, #root, .full-size {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  background: #282828;
+}
+
+button, input {
+  border: none;
+  outline: none;
+}
+
+.btn {
+  color: #fff;
+  background: #3C3C3C;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+
+  transition: background-color 50ms ease-in-out;
+
+  &:hover {
+    background: #323232;
+  }
+
+  &:active {
+    background: #282828;
+  }
+}
+
+#create-button {
+  font-size: 20px;
+}
+
+.download-button {
+  font-size: 16px;
+}
+
+.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-form-wrapper {
+  display: flex;
+  gap: 1rem;
+  background: #737373;
+  padding: 2rem;
+  border-radius: 5px;
+
+
+  .qr-form-edit, .qr-form-answer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .qr-form-answer-image {
+    width: 250px;
+    height: 250px;
+    background: white;
+    border-radius: 5px;
+  }
+
+  .qr-form-text-input {
+    font-size: 16px;
+    color: white;
+    padding: .5rem;
+    border-radius: 5px;
+    background: none;
+    border: 1px black solid;
+    width: 400px;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .qr-form-answer-image {
+    img {
+      border-radius: 5px;
+    }
+  }
+
+}
