@@ -81,7 +81,8 @@ button, input {
     border-radius: 5px;
 
     .qr-form-answer-image-bg {
-      background: white;
+      position: relative;
+      background: #ffffff;
       width: 250px;
       height: 250px;
     }
