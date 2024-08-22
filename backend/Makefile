@@ -4,3 +4,6 @@ build:
 
 run:
 	@go run cmd/main.go
+
+testQr:
+	@go test ./service/QR

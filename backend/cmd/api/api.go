@@ -6,6 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
+	qr "github.com/ufguff/service/QR"
 )
 
 type ApiServer struct {
@@ -20,6 +21,10 @@ func (s *ApiServer) Run() error {
 	router := mux.NewRouter()
 
 	subrouter := router.PathPrefix("api/v1").Subrouter()
+
+	qrStore := qr.Store{}
+	qrHandler := qr.NewHandler(&qrStore)
+	qrHandler.RegisterRoutes(subrouter)
 
 	c := cors.Default()
 
