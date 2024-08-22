@@ -1,7 +1,12 @@
 import { useState } from "react";
+import LoadingCircle from "./components/LoadingCircle/LoadingCircle.tsx";
 
 function App() {
   const [textToQR, setTextToQR] = useState<string>("")
+  const [QRSize, setQRSize] = useState<string>("")
+  const [QRImageUrl, setQRImageUrl] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
 
   return (
     <div id="app" className="full-size">
@@ -20,7 +25,8 @@ function App() {
           <div className="qr-form-answer">
             <div className="qr-form-answer-image content-center">
               <div className="qr-form-answer-image-bg">
-                <img src="" alt=""/>
+                {isLoading && (<LoadingCircle/>)}
+                {!isLoading && (<img src={QRImageUrl} alt=""/>)}
               </div>
             </div>
             <div className="qr-form-answer-buttons">
