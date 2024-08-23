@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingCircle from "./components/LoadingCircle/LoadingCircle.tsx";
 import { API_URL } from "./environment.ts";
 import axios from "axios";
 import { QRCode } from "./types.ts";
 
 function App() {
-  const [textToQR, setTextToQR] = useState<string>("")
+  const [textToQR, setTextToQR] = useState<string>(location.toString())
   const [QRSize, setQRSize] = useState<number>(250)
   const [QRImageUrl, setQRImageUrl] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -28,6 +28,10 @@ function App() {
     setIsLoading(false)
   }
 
+  useEffect(() => {
+    getQR()
+  }, [])
+
 
   return (
     <div id="app" className="full-size">
@@ -37,7 +41,7 @@ function App() {
             <h2>QR-code creator</h2>
             <div className="qr-form-edit">
               <div className="qr-form-edit-section">
-                <p>URL-адрес</p>
+                <p>Введите URL-адрес</p>
                 <input
                   type="text"
                   className="qr-form-text-input"
