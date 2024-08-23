@@ -22,7 +22,7 @@ func NewHandler(store types.ICreateQr) *Handler {
 }
 
 func (h *Handler) RegisterRoutes(router *mux.Router) {
-	router.HandleFunc("/GetQR", h.handleQRRequest).Methods(http.MethodGet)
+	router.HandleFunc("/GetQR", h.handleQRRequest).Methods(http.MethodPost)
 }
 
 func (h *Handler) handleQRRequest(w http.ResponseWriter, r *http.Request) {
