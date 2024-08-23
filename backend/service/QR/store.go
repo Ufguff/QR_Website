@@ -13,7 +13,9 @@ func CreateQR() *types.QR {
 }
 
 func (s *Store) GetQRImage(url string, size int) error {
-	err := qrcode.WriteFile(url, qrcode.Medium, size, "./static/qr.png")
+	qrCode, _ := qrcode.New(url, qrcode.Medium)
+
+	err := qrCode.WriteFile(size, "./static/qr.png")
 
 	if err != nil {
 		return err

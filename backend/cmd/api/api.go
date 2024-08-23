@@ -20,7 +20,7 @@ func NewApiServer(addr string) *ApiServer {
 func (s *ApiServer) Run() error {
 	router := mux.NewRouter()
 
-	subrouter := router.PathPrefix("api/v1").Subrouter()
+	subrouter := router.PathPrefix("/api/v1").Subrouter()
 
 	qrStore := qr.Store{}
 	qrHandler := qr.NewHandler(&qrStore)

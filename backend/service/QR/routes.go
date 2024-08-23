@@ -1,8 +1,8 @@
 package qr
 
 import (
+	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/ufguff/types"
@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	pathQr = "static/qr.png"
+	pathQr = "./static/qr.png"
 )
 
 type Handler struct {
@@ -26,22 +26,33 @@ func (h *Handler) RegisterRoutes(router *mux.Router) {
 }
 
 func (h *Handler) handleQRRequest(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
+	var payload *types.QR
+	log.Println("begin")
 
-	urlV := vars["url"]
-	sizeV := vars["size"]
-
-	size, err := strconv.Atoi(sizeV)
-	if err != nil {
-		utils.WriteError(w, http.StatusInternalServerError, err)
+	if err := utils.ParseJSON(r, &payload); err != nil {
+		log.Println(err, "parse")
+		utils.WriteError(w, http.StatusBadRequest, err)
+		return
 	}
 
-	err = h.store.GetQRImage(urlV, size)
+	if err := utils.Validator.Struct(payload); err != nil {
+		log.Println(err, "validate")
+		utils.WriteError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	log.Println(payload.Url)
+	log.Println(payload.Size)
+
+	err := h.store.GetQRImage(payload.Url, payload.Size)
 	if err != nil {
+		log.Println(err, "getQR")
 		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
 	}
 
 	http.ServeFile(w, r, pathQr)
 
 	//delete
+	utils.WriteJSON(w, http.StatusOK, "qr send")
 }

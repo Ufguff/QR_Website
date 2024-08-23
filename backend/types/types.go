@@ -5,8 +5,8 @@ import (
 )
 
 type QR struct {
-	Url  string
-	Size int
+	Url  string `json:"url"`
+	Size int    `json:"size"`
 	// Image
 	// color
 
