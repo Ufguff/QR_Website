@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  font-family: "Arial", sans-serif;
+
 }
 
 html, body, #root, .full-size {
@@ -57,10 +60,16 @@ button, input {
 }
 
 
+.text-center {
+  text-align: center;
+}
+
+
 .qr-form {
   display: block;
   margin: auto;
 }
+
 
 .qr-form-wrapper {
   display: flex;
@@ -69,22 +78,48 @@ button, input {
   padding: 2rem;
   border-radius: 5px;
 
-
-  .qr-form-edit, .qr-form-answer {
+  .qr-form-left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+  }
+
+
+  .qr-form-edit, .qr-form-answer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
+  }
+
+  .qr-form-edit {
+    .qr-form-edit-section {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
   }
 
   .qr-form-answer-image {
     border-radius: 5px;
+    overflow: hidden;
 
     .qr-form-answer-image-bg {
       position: relative;
       background: #ffffff;
       width: 250px;
       height: 250px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     img {
@@ -116,6 +151,9 @@ button, input {
 
   .qr-form {
     width: 100%;
+  }
+  #create-button {
+    margin-top: 1rem;
   }
 
   .qr-form-wrapper {

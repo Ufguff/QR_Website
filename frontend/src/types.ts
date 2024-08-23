@@ -1,4 +1,4 @@
 export interface QRCode {
-  content: string
+  url: string
   size: number
 }
