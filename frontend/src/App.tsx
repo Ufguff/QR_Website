@@ -89,7 +89,9 @@ function App() {
               </div>
             </div>
             <div className="qr-form-answer-buttons">
-              <button className="btn download-button">Скачать PNG</button>
+              <a href={QRImageUrl} download={"qr_code.png"}>
+                <button className="btn download-button">Скачать PNG</button>
+              </a>
             </div>
           </div>
         </div>
