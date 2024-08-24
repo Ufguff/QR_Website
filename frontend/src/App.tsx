@@ -3,12 +3,17 @@ import LoadingCircle from "./components/LoadingCircle/LoadingCircle.tsx";
 import { API_URL } from "./environment.ts";
 import axios from "axios";
 import { QRCode } from "./types.ts";
+import ColorPicker from "./components/ColorPicker/ColorPicker.tsx";
 
 function App() {
   const [textToQR, setTextToQR] = useState<string>(location.toString())
   const [QRSize, setQRSize] = useState<number>(250)
   const [QRImageUrl, setQRImageUrl] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const [backgroundColor, setBackgroundColor] = useState("#ffffff")
+  const [foregroundColor, setForegroundColor] = useState("#000000")
+
 
   const getQR = async (): Promise<void> => {
     if (!textToQR || QRSize < 250 || QRSize > 2048) return
@@ -19,6 +24,8 @@ function App() {
     const body: QRCode = {
       url: textToQR,
       size: QRSize,
+      background: backgroundColor,
+      foreground: foregroundColor
     }
 
     const response = await axios.post(url, body, {responseType: "blob"});
@@ -60,6 +67,16 @@ function App() {
                   onChange={(e) => setQRSize(parseInt(e.currentTarget.value))}
                 />
                 <p className="text-center">{QRSize}x{QRSize} Px</p>
+              </div>
+              <div className="qr-form-edit-section">
+                <div className="qr-form-edit-color">
+                  <div>Цвет фона:</div>
+                  <ColorPicker color={backgroundColor} setColor={setBackgroundColor}/>
+                </div>
+                <div className="qr-form-edit-color">
+                  <div>Цвет QR кода:</div>
+                  <ColorPicker color={foregroundColor} setColor={setForegroundColor}/>
+                </div>
               </div>
             </div>
             <button id="create-button" className="btn" onClick={getQR}>Создать QR-Код</button>
