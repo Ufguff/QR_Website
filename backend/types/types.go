@@ -1,17 +1,12 @@
 package types
 
-import (
-	_ "image/png" // ?
-)
-
 type QR struct {
-	Url  string `json:"url"`
-	Size int    `json:"size"`
-	// Image
-	// color
-
+	Url             string `json:"url"`
+	Size            int    `json:"size"`
+	BackgroundColor string `json:"background"`
+	ForegroundColor string `json:"foreground"`
 }
 
 type ICreateQr interface {
-	GetQRImage(string, int) error
+	GetQRImage(QR) error
 }
