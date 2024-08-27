@@ -59,7 +59,7 @@ function App() {
               </div>
               <div className="qr-form-edit-section">
                 <input
-                  min={150}
+                  min={250}
                   max={2048}
                   className="slider"
                   type="range"
@@ -70,12 +70,12 @@ function App() {
               </div>
               <div className="qr-form-edit-section">
                 <div className="qr-form-edit-color">
-                  <div>Цвет фона:</div>
-                  <ColorPicker color={backgroundColor} setColor={setBackgroundColor}/>
-                </div>
-                <div className="qr-form-edit-color">
                   <div>Цвет QR кода:</div>
                   <ColorPicker color={foregroundColor} setColor={setForegroundColor}/>
+                </div>
+                <div className="qr-form-edit-color">
+                  <div>Цвет фона:</div>
+                  <ColorPicker color={backgroundColor} setColor={setBackgroundColor}/>
                 </div>
               </div>
             </div>

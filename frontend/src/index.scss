@@ -74,7 +74,7 @@ button, input {
 .qr-form-wrapper {
   display: flex;
   gap: 1rem;
-  background: #737373;
+  background: #585858;
   padding: 2rem;
   border-radius: 5px;
 
@@ -103,32 +103,64 @@ button, input {
       display: flex;
       flex-direction: column;
       gap: .3rem;
+
+      .slider[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        cursor: pointer;
+
+        margin-bottom: .5rem;
+      }
+
+      .slider[type="range"]::-webkit-slider-runnable-track {
+        background: #ffffff;
+        height: .25rem;
+      }
+
+      .slider[type="range"]::-moz-range-track {
+        background: #ffffff;
+        height: .25rem;
+      }
+
+      .slider[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        margin-top: -.4rem;
+        background: #262626;
+
+        transition: background-color 300ms ease-in-out;
+      }
+
+      .slider[type="range"]:hover::-webkit-slider-thumb {
+        background: #333333;
+      }
     }
   }
 
   .qr-form-edit-color {
     display: flex;
     align-items: center;
+    gap: .3rem;
   }
 
   .qr-form-answer-image {
     border-radius: 5px;
-    overflow: hidden;
 
     .qr-form-answer-image-bg {
       position: relative;
       background: #ffffff;
       width: 250px;
       height: 250px;
+      border-radius: 5px;
+      overflow: hidden;
 
       img {
         width: 100%;
         height: 100%;
       }
-    }
-
-    img {
-      border-radius: 5px;
     }
   }
 
