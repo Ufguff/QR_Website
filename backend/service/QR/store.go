@@ -15,23 +15,38 @@ func CreateQR() *types.QR {
 	return &types.QR{}
 }
 
-func (s *Store) GetQRImage(qr types.QR) error {
+func (s *Store) GetQRImage(qr types.QR) ([]byte, error) {
 	var cBack, cFore color.Color
 	cBack, errBack := hexcolor.Parse(qr.BackgroundColor)
 	cFore, errFore := hexcolor.Parse(qr.ForegroundColor)
 
 	if errBack != nil {
-		return errBack
+		return nil, errBack
 	}
 
 	if errFore != nil {
-		return errFore
+		return nil, errFore
 	}
 
-	err := qrcode.WriteColorFile(qr.Url, qrcode.Highest, qr.Size, cBack, cFore, "./static/qr.png")
+	// err := qrcode.WriteColorFile(qr.Url, qrcode.Highest, qr.Size, cBack, cFore, pathQr)
+	// if err != nil {
+	// 	return err
+	// }
+
+	qrRaw, err := qrcode.New(qr.Url, qrcode.Highest)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+
+	qrRaw.BackgroundColor = cBack
+	qrRaw.ForegroundColor = cFore
+
+	qrByte, err := qrRaw.PNG(qr.Size)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return qrByte, nil
 }

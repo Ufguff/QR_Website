@@ -8,5 +8,5 @@ type QR struct {
 }
 
 type ICreateQr interface {
-	GetQRImage(QR) error
+	GetQRImage(QR) ([]byte, error)
 }

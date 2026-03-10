@@ -3,7 +3,6 @@ package qr
 import (
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/ufguff/types"
@@ -43,15 +42,19 @@ func (h *Handler) handleQRRequest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("get qr")
-	err := h.store.GetQRImage(*payload)
+	qrByte, err := h.store.GetQRImage(*payload)
 	if err != nil {
 		utils.WriteError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	http.ServeFile(w, r, pathQr)
+	_, err = w.Write(qrByte)
+	if err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
 
 	utils.WriteJSON(w, http.StatusOK, nil)
 
-	os.Remove(pathQr)
+	// os.Remove(pathQr)
 }
